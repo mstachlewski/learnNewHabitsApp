@@ -1,15 +1,20 @@
-import { Container, Typography, Box, Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import "./App.css";
 import ButtonAppBar from "./navbar.tsx";
 import Task from "./task.tsx";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import taskType from "./utils/types.ts";
-// import { addNewTask } from "./utils/functions.ts";
+import type { RootState } from "./utils/store.tsx";
+import { useSelector, useDispatch } from "react-redux";
+import { increment } from "./utils/tasksReducer.ts";
 
 function App() {
+  const count = useSelector((state: RootState) => state.counter[5].taskName);
+  const dispatch = useDispatch();
   const [tasksArray, setTasksArray] = useState<taskType[]>([]);
 
   const addNewTask = () => {
+    dispatch(dispatch(increment("taskNAme")));
     const tempTasksArray = [...tasksArray];
     tempTasksArray.push({
       taskName: "Task1",
@@ -27,6 +32,7 @@ function App() {
   return (
     <>
       <Box>
+        asd{count}
         <ButtonAppBar />
       </Box>
       <Box>
@@ -36,6 +42,7 @@ function App() {
         <Button
           onClick={addNewTask}
           variant="contained"
+          color="primary"
           sx={{ mx: 4, my: 6, width: 100, height: 100 }}
         >
           + Add
