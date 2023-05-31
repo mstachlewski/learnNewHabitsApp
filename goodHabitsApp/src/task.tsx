@@ -1,7 +1,8 @@
 import { Typography, Box } from "@mui/material";
 import Square from "./square";
+import { taskPropsType } from "./utils/types";
 
-function Task() {
+function Task(props: taskPropsType) {
   return (
     <>
       <Box
@@ -15,7 +16,7 @@ function Task() {
           flexWrap: "wrap",
         }}
       >
-        <Typography sx={{ mx: 4, my: 2 }}>Task1:</Typography>
+        <Typography sx={{ mx: 4, my: 2 }}>{props.taskName}</Typography>
         <Box>
           <Square></Square>
           <Square></Square>

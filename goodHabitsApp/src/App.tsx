@@ -3,22 +3,26 @@ import "./App.css";
 import ButtonAppBar from "./navbar.tsx";
 import Task from "./task.tsx";
 import { useEffect, useState } from "react";
+import taskType from "./utils/types.ts";
 // import { addNewTask } from "./utils/functions.ts";
 
 function App() {
-  const [tasksArray, setTasksArray] = useState([{}]);
+  const [tasksArray, setTasksArray] = useState<taskType[]>([]);
 
   const addNewTask = () => {
     const tempTasksArray = [...tasksArray];
     tempTasksArray.push({
-      id: tempTasksArray.length,
       taskName: "Task1",
-      IsDone: false,
+      isDone: false,
     });
     setTasksArray(tempTasksArray);
   };
 
-  const renderTasks = () => {};
+  const renderTasks = () => {
+    return tasksArray.map((task) => (
+      <Task taskName={task.taskName} isDone={false} />
+    ));
+  };
 
   return (
     <>
@@ -27,9 +31,7 @@ function App() {
       </Box>
       <Box>
         <Box className="TaskContainer" sx={{ mt: 6 }}>
-          <Task></Task>
-          <Task></Task>
-          <Task></Task>
+          {renderTasks()}
         </Box>
         <Button
           onClick={addNewTask}
