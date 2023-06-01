@@ -1,10 +1,14 @@
 import { Typography, Box } from "@mui/material";
 import Square from "./square";
-import { taskPropsType } from "./utils/types";
 import { Chip } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useAppSelector, useAppDispatch } from "./utils/hooks.ts";
+import { taskPropsType } from "./utils/types.ts";
+import { deleteTaskFromArray } from "./utils/taskSlice.ts";
 
 function Task(props: taskPropsType) {
+  const task = useAppSelector((state) => state.task);
+  const dispatch = useAppDispatch();
   return (
     <>
       <Box
@@ -25,7 +29,7 @@ function Task(props: taskPropsType) {
             my: 2,
           }}
         >
-          {props.taskName}
+          {task[props.id].taskName}
         </Typography>
         <Box>
           <Square></Square>
@@ -42,7 +46,7 @@ function Task(props: taskPropsType) {
             mx: 2,
             ":hover": { color: "red", bgcolor: "#ded8ce" },
           }}
-          //onClick={handleClick}
+          onClick={() => dispatch(deleteTaskFromArray(props.id))}
           //onDelete={handleDelete}
           deleteIcon={<DeleteIcon />}
           variant="outlined"

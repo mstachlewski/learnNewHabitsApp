@@ -1,8 +1,12 @@
 import { Button } from "@mui/material";
 import { useState } from "react";
+import store from "./utils/store.tsx";
+import { useAppSelector } from "./utils/hooks.ts";
 
 function Square() {
   const [isClicked, setIsClicked] = useState(false);
+
+  // const task = useAppSelector((state) => state.task);
 
   const handleSquareClick = () => {
     setIsClicked(!isClicked);

@@ -1,52 +1,78 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import "./App.css";
 import ButtonAppBar from "./navbar.tsx";
 import Task from "./task.tsx";
 import { useState } from "react";
 import taskType from "./utils/types.ts";
-import type { RootState } from "./utils/store.tsx";
+import store from "./utils/store.tsx";
+import { addNewTaskToArray } from "./utils/taskSlice.ts";
 import { useSelector, useDispatch } from "react-redux";
-import { increment } from "./utils/tasksReducer.ts";
+import { useAppSelector, useAppDispatch } from "./utils/hooks.ts";
 
 function App() {
-  const count = useSelector((state: RootState) => state.counter[5].taskName);
-  const dispatch = useDispatch();
-  const [tasksArray, setTasksArray] = useState<taskType[]>([]);
+  const [isFormOn, setIsFormOn] = useState<boolean>(false);
+  const [inputTaskNameValue, setInputTaskNameValue] = useState<string>("");
+  const task = useAppSelector((state) => state.task);
+  const dispatch = useAppDispatch();
+  console.log(
+    "task",
+    useSelector((state) => state)
+  );
+
+  const readTaskName = (e) => {
+    setInputTaskNameValue(e.currentTarget.value);
+  };
 
   const addNewTask = () => {
-    dispatch(dispatch(increment("taskNAme")));
-    const tempTasksArray = [...tasksArray];
-    tempTasksArray.push({
-      taskName: "Task1",
-      isDone: false,
-    });
-    setTasksArray(tempTasksArray);
+    setIsFormOn(!isFormOn);
+    if (isFormOn) {
+      dispatch(
+        addNewTaskToArray({
+          name: inputTaskNameValue,
+          arrayOfTaskDays: [],
+        })
+      );
+      setInputTaskNameValue("");
+    }
   };
 
   const renderTasks = () => {
-    return tasksArray.map((task) => (
-      <Task taskName={task.taskName} isDone={false} />
+    return task.map((task: taskType, index) => (
+      <Task taskName={task.taskName} arrayOfTaskDays={[{}]} id={index} />
     ));
   };
 
   return (
     <>
       <Box>
-        asd{count}
         <ButtonAppBar />
       </Box>
       <Box>
         <Box className="TaskContainer" sx={{ mt: 6 }}>
           {renderTasks()}
         </Box>
-        <Button
-          onClick={addNewTask}
-          variant="contained"
-          color="primary"
-          sx={{ mx: 4, my: 6, width: 100, height: 100 }}
+        <Box
+          sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
         >
-          + Add
-        </Button>
+          {isFormOn && (
+            <TextField
+              sx={{ ml: 4 }}
+              id="standard-basic"
+              label="Name of new habit:"
+              variant="standard"
+              onChange={readTaskName}
+              value={inputTaskNameValue}
+            />
+          )}
+          <Button
+            onClick={addNewTask}
+            variant="contained"
+            color="primary"
+            sx={{ mx: 4, my: 6, width: 100, height: 100 }}
+          >
+            + Add
+          </Button>
+        </Box>
       </Box>
     </>
   );

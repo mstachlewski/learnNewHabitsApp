@@ -1,10 +1,11 @@
-type task = {
+type taskType = {
   taskName: string;
-  isDone: boolean;
+  arrayOfTaskDays: [{ id: number; isDone: true }];
 };
 
 export type taskPropsType = {
+  id: number;
   taskName: string;
-  isDone: boolean;
+  arrayOfTaskDays: [{ id: number; isDone: true }];
 };
-export default task;
+export default taskType;
