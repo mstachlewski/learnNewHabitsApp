@@ -2,12 +2,14 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type initialState = {
   taskName: string;
-  arrayOfTaskDays: [{ id: number; isDone: true }];
+  arrayOfTaskDays: { id: number; isDone: true }[];
 }[];
+
+const initialState: initialState = [];
 
 const taskSlice = createSlice({
   name: "task",
-  initialState: [{}],
+  initialState: initialState,
   reducers: {
     addNewTaskToArray: (
       state,

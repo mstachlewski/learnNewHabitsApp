@@ -23,14 +23,16 @@ function Task(props: taskPropsType) {
           flexWrap: "wrap",
         }}
       >
-        <Typography
-          sx={{
-            mx: 4,
-            my: 2,
-          }}
-        >
-          {task[props.id].taskName}
-        </Typography>
+        <Box sx={{ width: "30%", overflowWrap: "break-word" }}>
+          <Typography
+            sx={{
+              mx: 4,
+              my: 2,
+            }}
+          >
+            {task[props.id].taskName}
+          </Typography>
+        </Box>
         <Box>
           <Square></Square>
           <Square></Square>
@@ -40,6 +42,7 @@ function Task(props: taskPropsType) {
           <Square></Square>
           <Square></Square>
         </Box>
+
         <Chip
           label="delete"
           sx={{

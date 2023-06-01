@@ -3,10 +3,7 @@ import "./App.css";
 import ButtonAppBar from "./navbar.tsx";
 import Task from "./task.tsx";
 import { useState } from "react";
-import taskType from "./utils/types.ts";
-import store from "./utils/store.tsx";
 import { addNewTaskToArray } from "./utils/taskSlice.ts";
-import { useSelector, useDispatch } from "react-redux";
 import { useAppSelector, useAppDispatch } from "./utils/hooks.ts";
 
 function App() {
@@ -16,10 +13,10 @@ function App() {
   const dispatch = useAppDispatch();
   console.log(
     "task",
-    useSelector((state) => state)
+    useAppSelector((state) => state)
   );
 
-  const readTaskName = (e) => {
+  const readTaskName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputTaskNameValue(e.currentTarget.value);
   };
 
@@ -37,9 +34,7 @@ function App() {
   };
 
   const renderTasks = () => {
-    return task.map((task: taskType, index) => (
-      <Task taskName={task.taskName} arrayOfTaskDays={[{}]} id={index} />
-    ));
+    return task.map((_, index) => <Task id={index} />);
   };
 
   return (
@@ -49,6 +44,24 @@ function App() {
       </Box>
       <Box>
         <Box className="TaskContainer" sx={{ mt: 6 }}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Box sx={{ width: "30%" }}></Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                textAlign: "center",
+              }}
+            >
+              <Box sx={{ width: 64 }}>day1</Box>
+              <Box sx={{ width: 64 }}>day2</Box>
+              <Box sx={{ width: 64 }}>day3</Box>
+              <Box sx={{ width: 64 }}>day4</Box>
+              <Box sx={{ width: 64 }}>day5</Box>
+              <Box sx={{ width: 64 }}>day6</Box>
+              <Box sx={{ width: 64 }}>day7</Box>
+            </Box>
+          </Box>
           {renderTasks()}
         </Box>
         <Box
