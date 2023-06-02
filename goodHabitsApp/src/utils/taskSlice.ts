@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type initialState = {
   taskName: string;
-  arrayOfTaskDays: { id: number; isDone: true }[];
+  arrayOfTaskDays: { id: string; isDone: boolean }[];
 }[];
 
 const initialState: initialState = [];
@@ -15,7 +15,7 @@ const taskSlice = createSlice({
       state,
       action: PayloadAction<{
         name: string;
-        arrayOfTaskDays: { id: number; isDone: true }[];
+        arrayOfTaskDays: { id: string; isDone: boolean }[];
       }>
     ) => {
       state.push({
@@ -26,8 +26,17 @@ const taskSlice = createSlice({
     deleteTaskFromArray: (state, action: PayloadAction<number>) => {
       state.splice(action.payload, 1);
     },
+    setTaskIsDone: (
+      state,
+      action: PayloadAction<{ idOfTask: number; idOfDay: number }>
+    ) => {
+      state[action.payload.idOfTask].arrayOfTaskDays[
+        action.payload.idOfDay
+      ].isDone = true;
+    },
   },
 });
 
 export default taskSlice.reducer;
-export const { addNewTaskToArray, deleteTaskFromArray } = taskSlice.actions;
+export const { addNewTaskToArray, deleteTaskFromArray, setTaskIsDone } =
+  taskSlice.actions;

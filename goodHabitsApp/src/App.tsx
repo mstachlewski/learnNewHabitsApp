@@ -6,6 +6,7 @@ import { useState } from "react";
 import { addNewTaskToArray } from "./utils/taskSlice.ts";
 import { useAppSelector, useAppDispatch } from "./utils/hooks.ts";
 import DateDisplay from "./DateDisplay.tsx";
+import { giveArrayOfSquares } from "./utils/functions.ts";
 
 function App() {
   const [isFormOn, setIsFormOn] = useState<boolean>(false);
@@ -14,7 +15,7 @@ function App() {
   const dispatch = useAppDispatch();
   console.log(
     "task",
-    useAppSelector((state) => state)
+    useAppSelector((state) => state.task)
   );
 
   const readTaskName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,10 +25,13 @@ function App() {
   const addNewTask = () => {
     setIsFormOn(!isFormOn);
     if (isFormOn) {
+      const temparr = giveArrayOfSquares(inputTaskNameValue);
+
+      console.log(task);
       dispatch(
         addNewTaskToArray({
           name: inputTaskNameValue,
-          arrayOfTaskDays: [],
+          arrayOfTaskDays: temparr,
         })
       );
       setInputTaskNameValue("");

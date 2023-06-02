@@ -1,15 +1,15 @@
 import { Button } from "@mui/material";
 import { useState } from "react";
 import store from "./utils/store.tsx";
-import { useAppSelector } from "./utils/hooks.ts";
+import { useAppSelector, useAppDispatch } from "./utils/hooks.ts";
+import { setTaskIsDone } from "./utils/taskSlice.ts";
 
-function Square() {
+function Square(props: { id: number; idOfTask: number }) {
   const [isClicked, setIsClicked] = useState(false);
-
-  // const task = useAppSelector((state) => state.task);
-
+  const dispatch = useAppDispatch();
   const handleSquareClick = () => {
     setIsClicked(!isClicked);
+    dispatch(setTaskIsDone({ idOfTask: props.idOfTask, idOfDay: props.id }));
   };
 
   return (

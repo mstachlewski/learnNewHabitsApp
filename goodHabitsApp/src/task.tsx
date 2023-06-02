@@ -34,13 +34,13 @@ function Task(props: taskPropsType) {
           </Typography>
         </Box>
         <Box>
-          <Square></Square>
-          <Square></Square>
-          <Square></Square>
-          <Square></Square>
-          <Square></Square>
-          <Square></Square>
-          <Square></Square>
+          <Square id={0} idOfTask={props.id}></Square>
+          <Square id={1} idOfTask={props.id}></Square>
+          <Square id={2} idOfTask={props.id}></Square>
+          <Square id={3} idOfTask={props.id}></Square>
+          <Square id={4} idOfTask={props.id}></Square>
+          <Square id={5} idOfTask={props.id}></Square>
+          <Square id={6} idOfTask={props.id}></Square>
         </Box>
 
         <Chip

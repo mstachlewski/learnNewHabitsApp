@@ -1,16 +1,7 @@
-import { Box } from "@mui/material";
+import { Box, Chip } from "@mui/material";
+import { getDayAndMonthRelativeToToday } from "./utils/functions";
 
 export default function DateDisplay() {
-  const date = new Date();
-
-  function getDayAndMonthRelativeToToday(offset: number): string {
-    const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() + offset);
-    const day = currentDate.getDate().toString().padStart(2, "0");
-    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0"); // Month is zero-based, so we add 1
-    return `${day}.${month}`;
-  }
-
   return (
     <Box sx={{ display: "flex" }}>
       <Box sx={{ width: "30%" }}></Box>
@@ -21,27 +12,42 @@ export default function DateDisplay() {
           textAlign: "center",
         }}
       >
-        <Box sx={{ width: 64, ml: "1px" }}>{`${getDayAndMonthRelativeToToday(
-          -3
-        )}`}</Box>
-        <Box sx={{ width: 64, ml: "1px" }}>{`${getDayAndMonthRelativeToToday(
-          -2
-        )}`}</Box>
-        <Box sx={{ width: 64, ml: "1px" }}>{`${getDayAndMonthRelativeToToday(
-          -1
-        )}`}</Box>
-        <Box sx={{ width: 64, ml: "1px" }}>{`${getDayAndMonthRelativeToToday(
-          0
-        )}`}</Box>
-        <Box sx={{ width: 64, ml: "1px" }}>{`${getDayAndMonthRelativeToToday(
-          1
-        )}`}</Box>
-        <Box sx={{ width: 64, ml: "1px" }}>{`${getDayAndMonthRelativeToToday(
-          2
-        )}`}</Box>
-        <Box sx={{ width: 64, ml: "1px" }}>{`${getDayAndMonthRelativeToToday(
-          3
-        )}`}</Box>
+        {/* Maybe change color of chip based on how many tasks you acomplished that day  */}
+        <Chip
+          color="secondary"
+          sx={{ width: 64, mx: "1px" }}
+          label={`${getDayAndMonthRelativeToToday(-3)}`}
+        ></Chip>
+        <Chip
+          color="secondary"
+          sx={{ width: 64, mx: "1px" }}
+          label={`${getDayAndMonthRelativeToToday(-2)}`}
+        ></Chip>
+        <Chip
+          color="secondary"
+          sx={{ width: 64, mx: "1px" }}
+          label={`${getDayAndMonthRelativeToToday(-1)}`}
+        ></Chip>
+        <Chip
+          color="secondary"
+          sx={{ width: 64, mx: "1px" }}
+          label={`${getDayAndMonthRelativeToToday(0)}`}
+        ></Chip>
+        <Chip
+          color="secondary"
+          sx={{ width: 64, mx: "1px" }}
+          label={`${getDayAndMonthRelativeToToday(1)}`}
+        ></Chip>
+        <Chip
+          color="secondary"
+          sx={{ width: 64, mx: "1px" }}
+          label={`${getDayAndMonthRelativeToToday(2)}`}
+        ></Chip>
+        <Chip
+          color="secondary"
+          sx={{ width: 64, mx: "1px" }}
+          label={`${getDayAndMonthRelativeToToday(3)}`}
+        ></Chip>
       </Box>
     </Box>
   );
