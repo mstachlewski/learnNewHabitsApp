@@ -42,6 +42,17 @@ const taskSlice = createSlice({
     ) => {
       state[action.payload.id].taskName = action.payload.newName;
     },
+    changeDate: (
+      state,
+      action: PayloadAction<{ id: number; type: "left" | "right" }>
+    ) => {
+      //if left
+      state.forEach((task) => {
+        //array unshift na pierwszy element task.arrayOfTaskDays.forEach()
+      });
+
+      //if right to array push na ostatni element
+    },
   },
 });
 

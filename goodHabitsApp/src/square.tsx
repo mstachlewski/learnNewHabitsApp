@@ -6,7 +6,6 @@ import { setTaskIsDone } from "./utils/taskSlice.ts";
 function Square(props: { id: number; idOfTask: number }) {
   const task = useAppSelector((state) => state.task);
   const [isClicked, setIsClicked] = useState(false);
-  const [newTaskName, setNewTaskName] = useState("");
   const dispatch = useAppDispatch();
   const handleSquareClick = () => {
     setIsClicked(!isClicked);
