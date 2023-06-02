@@ -68,7 +68,7 @@ function App() {
           <Button
             onClick={addNewTask}
             variant="contained"
-            color="primary"
+            color="success"
             sx={{ mx: 4, my: 6, width: 100, height: 100 }}
           >
             + Add

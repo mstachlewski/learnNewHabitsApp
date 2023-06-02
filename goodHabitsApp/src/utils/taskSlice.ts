@@ -36,9 +36,19 @@ const taskSlice = createSlice({
         !state[action.payload.idOfTask].arrayOfTaskDays[action.payload.idOfDay]
           .isDone;
     },
+    setNewName: (
+      state,
+      action: PayloadAction<{ id: number; newName: string }>
+    ) => {
+      state[action.payload.id].taskName = action.payload.newName;
+    },
   },
 });
 
 export default taskSlice.reducer;
-export const { addNewTaskToArray, deleteTaskFromArray, setTaskIsDone } =
-  taskSlice.actions;
+export const {
+  addNewTaskToArray,
+  deleteTaskFromArray,
+  setTaskIsDone,
+  setNewName,
+} = taskSlice.actions;
