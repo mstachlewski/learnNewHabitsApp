@@ -5,6 +5,7 @@ import Task from "./task.tsx";
 import { useState } from "react";
 import { addNewTaskToArray } from "./utils/taskSlice.ts";
 import { useAppSelector, useAppDispatch } from "./utils/hooks.ts";
+import DateDisplay from "./DateDisplay.tsx";
 
 function App() {
   const [isFormOn, setIsFormOn] = useState<boolean>(false);
@@ -44,24 +45,7 @@ function App() {
       </Box>
       <Box>
         <Box className="TaskContainer" sx={{ mt: 6 }}>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Box sx={{ width: "30%" }}></Box>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                textAlign: "center",
-              }}
-            >
-              <Box sx={{ width: 64 }}>day1</Box>
-              <Box sx={{ width: 64 }}>day2</Box>
-              <Box sx={{ width: 64 }}>day3</Box>
-              <Box sx={{ width: 64 }}>day4</Box>
-              <Box sx={{ width: 64 }}>day5</Box>
-              <Box sx={{ width: 64 }}>day6</Box>
-              <Box sx={{ width: 64 }}>day7</Box>
-            </Box>
-          </Box>
+          {DateDisplay()}
           {renderTasks()}
         </Box>
         <Box
