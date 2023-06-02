@@ -77,7 +77,7 @@ function Task(props: taskPropsType) {
             )}
           </Typography>
         </Box>
-        <Box>
+        <Box sx={{ ml: "40px" }}>
           <Square id={0} idOfTask={props.id}></Square>
           <Square id={1} idOfTask={props.id}></Square>
           <Square id={2} idOfTask={props.id}></Square>
