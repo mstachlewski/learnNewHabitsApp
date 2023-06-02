@@ -32,7 +32,9 @@ const taskSlice = createSlice({
     ) => {
       state[action.payload.idOfTask].arrayOfTaskDays[
         action.payload.idOfDay
-      ].isDone = true;
+      ].isDone =
+        !state[action.payload.idOfTask].arrayOfTaskDays[action.payload.idOfDay]
+          .isDone;
     },
   },
 });

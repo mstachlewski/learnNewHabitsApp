@@ -1,7 +1,6 @@
 import { Button } from "@mui/material";
 import { useState } from "react";
-import store from "./utils/store.tsx";
-import { useAppSelector, useAppDispatch } from "./utils/hooks.ts";
+import { useAppDispatch } from "./utils/hooks.ts";
 import { setTaskIsDone } from "./utils/taskSlice.ts";
 
 function Square(props: { id: number; idOfTask: number }) {
