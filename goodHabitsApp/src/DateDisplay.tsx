@@ -11,7 +11,7 @@ export default function DateDisplay() {
     setDaysOffset(daysOffset - 1);
   };
   const goRight = () => {
-    setDaysOffset(daysOffset + 1);
+    setDaysOffset(daysOffset + 3);
   };
 
   return (

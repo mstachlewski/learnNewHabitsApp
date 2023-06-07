@@ -2,13 +2,27 @@ import { Box, Button, TextField } from "@mui/material";
 import "./App.css";
 import ButtonAppBar from "./navbar.tsx";
 import Task from "./task.tsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { addNewTaskToArray } from "./utils/taskSlice.ts";
 import { useAppSelector, useAppDispatch } from "./utils/hooks.ts";
 import DateDisplay from "./DateDisplay.tsx";
 import { giveArrayOfSquares } from "./utils/functions.ts";
+import axios from "axios";
+axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
+
+// const api = axios.create({
+//   baseURL: `http://localhost:3000`,
+// });
 
 function App() {
+  useEffect(() => {
+    console.log("asdsd");
+    axios
+      .get(`http://localhost:5000/tasklist`)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+
   const [isFormOn, setIsFormOn] = useState<boolean>(false);
   const [inputTaskNameValue, setInputTaskNameValue] = useState<string>("");
   const task = useAppSelector((state) => state.task);
