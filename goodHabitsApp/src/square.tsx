@@ -15,11 +15,11 @@ function Square(props: { id: number; idOfTask: number }) {
   return (
     <Button
       color="secondary"
-      variant={
-        task[props.idOfTask].arrayOfTaskDays[props.id].isDone
-          ? "contained"
-          : "outlined"
-      }
+      // variant={
+      //   task[props.idOfTask].arrayOfTaskDays[props.id].isDone
+      //     ? "contained"
+      //     : "outlined"
+      // }
       onClick={handleSquareClick}
       sx={{
         border: "2px solid #7895B2",

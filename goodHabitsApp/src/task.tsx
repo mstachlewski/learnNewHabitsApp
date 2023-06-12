@@ -5,12 +5,14 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useAppSelector, useAppDispatch } from "./utils/hooks.ts";
 import { taskPropsType } from "./utils/types.ts";
 import { deleteTaskFromArray, setNewName } from "./utils/taskSlice.ts";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CheckIcon from "@mui/icons-material/Check";
+import axios from "axios";
 
 function Task(props: taskPropsType) {
   const [editTask, setEditTask] = useState<boolean>(false);
   const [newTaskName, setNewTaskName] = useState("");
+  const [taskArray, setTaskArray] = useState([{}]);
 
   const task = useAppSelector((state) => state.task);
   const dispatch = useAppDispatch();
@@ -28,6 +30,25 @@ function Task(props: taskPropsType) {
     console.log(editTask);
     dispatch(setNewName({ id: props.id, newName: newTaskName }));
   };
+
+  const deleteTask = () => {
+    axios.delete(`http://localhost:5000/tasklist/${props.name}`).then(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+
+  useEffect(() => {
+    console.log("taskTable");
+    axios
+      .get(`http://127.0.0.1:5000/tasklist`)
+      .then((res) => setTaskArray(res.data))
+      .catch((err) => console.log(err));
+  }, [editTask]);
 
   return (
     <>
@@ -73,7 +94,7 @@ function Task(props: taskPropsType) {
                 ></Chip>
               </Box>
             ) : (
-              <Box onClick={openNameEditor}>{task[props.id].taskName}</Box>
+              <Box onClick={openNameEditor}>{props.name}</Box>
             )}
           </Typography>
         </Box>
@@ -93,7 +114,7 @@ function Task(props: taskPropsType) {
             mx: 2,
             ":hover": { color: "red", bgcolor: "#ded8ce" },
           }}
-          onClick={() => dispatch(deleteTaskFromArray(props.id))}
+          onClick={deleteTask}
           deleteIcon={<DeleteIcon />}
           variant="outlined"
         />

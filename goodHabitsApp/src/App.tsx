@@ -15,22 +15,22 @@ axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 // });
 
 function App() {
+  const [taskArray, setTaskArray] = useState([{}]);
+
   useEffect(() => {
-    console.log("asdsd");
+    console.log("taskTable");
     axios
-      .get(`http://localhost:5000/tasklist`)
-      .then((res) => console.log(res.data))
+      .get(`http://127.0.0.1:5000/tasklist`)
+      .then((res) => setTaskArray(res.data))
       .catch((err) => console.log(err));
   }, []);
+
+  console.log(taskArray);
 
   const [isFormOn, setIsFormOn] = useState<boolean>(false);
   const [inputTaskNameValue, setInputTaskNameValue] = useState<string>("");
   const task = useAppSelector((state) => state.task);
   const dispatch = useAppDispatch();
-  console.log(
-    "task",
-    useAppSelector((state) => state.task)
-  );
 
   const readTaskName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputTaskNameValue(e.currentTarget.value);
@@ -40,7 +40,16 @@ function App() {
     setIsFormOn(!isFormOn);
     if (isFormOn) {
       const temparr = giveArrayOfSquares(inputTaskNameValue);
-
+      axios
+        .post("http://localhost:5000/tasklist", { name: inputTaskNameValue })
+        .then(
+          (response) => {
+            console.log(response);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
       console.log(task);
       dispatch(
         addNewTaskToArray({
@@ -53,7 +62,7 @@ function App() {
   };
 
   const renderTasks = () => {
-    return task.map((_, index) => <Task id={index} />);
+    return taskArray.map((elem, index) => <Task id={index} name={elem.name} />);
   };
 
   return (

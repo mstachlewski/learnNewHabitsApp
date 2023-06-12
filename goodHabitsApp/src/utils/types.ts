@@ -5,5 +5,6 @@ type taskType = {
 
 export type taskPropsType = {
   id: number;
+  name: string;
 };
 export default taskType;
